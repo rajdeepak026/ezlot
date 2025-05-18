@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-yXcMZzFl6bwZuL5HqlJfbHMPWQqUAF5AAZhvxVmw6bZrFz4Z6i5wBjsmvDnT/J4WUg6a8UdMZMl3iItm9Vqx3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+    <!-- Navbar -->
+    <!-- <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="/user/{{this_user.id}}" class="text-xl font-semibold text-cyan-500">Welcome {{this_user.fullname}}</a>
+            <div class="space-x-4">
+                <a href="/user/{{this_user.id}}" class="text-gray-700 hover:text-cyan-500">Home</a>
+<a href="/user_summary/{{ this_user.id }}" class="text-gray-700 hover:text-cyan-500">Summary</a>
+<a href="/logout" class="text-red-600 hover:text-red-800">Logout</a>
+                <a href="/profile/{{this_user.id}}" class="text-gray-700 hover:text-cyan-500">Profile</a>
+            </div>
+        </div>
+    </nav> -->
+    <nav class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        
+        <!-- Left Section: Logo and Brand Name -->
+        <div class="flex items-center space-x-3">
+            <span class="text-2xl font-bold text-gray-800">EZLot</span>
+        </div>
+
+        <!-- Center Section: Navigation Links -->
+        <div class="hidden md:flex space-x-6">
+            <a href="/user/{{ this_user.id }}" class="text-gray-700 hover:text-cyan-500 text-sm font-medium">Home</a>
+            <a href="/user_summary/{{ this_user.id }}" class="text-gray-700 hover:text-cyan-500 text-sm font-medium">Summary</a>
+            <a href="/profile/{{ this_user.id }}" class="text-gray-700 hover:text-cyan-500 text-sm font-medium">Profile</a>
+        </div>
+
+        <!-- Right Section: Welcome and Logout -->
+        <div class="flex items-center space-x-4">
+            <span class="text-sm text-gray-600">Welcome, <strong>{{ this_user.fullname }}</strong></span>
+            <a href="/logout" class="text-red-600 hover:text-red-800 text-sm font-medium">Logout</a>
+        </div>
+    </div>
+</nav>
+
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto p-6">
+
+        <!-- Recent Parking History Section -->
+        <h3 class="text-2xl font-bold mb-4">Recent Parking History</h3>
+        <div class="overflow-x-auto bg-white shadow rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Id</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Location</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Vehicle No</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Time Stamp</th>
+                        <th class="px-6 py-3 text-center text-sm font-medium text-gray-600">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    {% for lot in booked_lots %}
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4">{{ lot.id }}</td>
+                        <td class="px-6 py-4">{{ lot.address }}</td>
+                        <td class="px-6 py-4">{{ lot.vehicle_no }}</td>
+                        <td class="px-6 py-4">{{ lot.timestamp or 'N/A' }}</td>
+                        <td class="px-6 py-4 text-center">
+                            <a href="/release/{{ lot.id }}/{{ this_user.id }}" class="inline-block px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600">Park Out</a>
+                            <a href="/park_out/{{ lot.id }}/{{ this_user.id }}" class="inline-block px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">Release</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Available Parking Lots Section -->
+        <h3 class="text-2xl font-bold mt-6 mb-4">Park Lots</h3>
+        <div class="overflow-x-auto bg-white shadow rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Id</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Address</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Availability</th>
+                        <th class="px-6 py-3 text-center text-sm font-medium text-gray-600">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    {% for lot in available_parking_lots %}
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4">{{ lot.id }}</td>
+                        <td class="px-6 py-4">{{ lot.address }}</td>
+                        <td class="px-6 py-4">{{ lot.status }}</td>
+                        <td class="px-6 py-4 text-center">
+                            <a href="/book/{{ lot.id }}?user_id={{ this_user.id }}" class="inline-block px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">Book</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+</body>
+</html>

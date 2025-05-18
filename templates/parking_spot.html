@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>View/Delete Parking Spot</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center font-sans">
+
+  <div class="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold text-center text-cyan-500 mb-6">Vehicle Parking System</h1>
+    <h2 class="text-lg font-semibold text-center mb-4">View / Delete Parking Spot</h2>
+
+    <form action="/delete_spot/{{ parking_spot.id }}" method="POST" class="space-y-6">
+
+      <!-- Spot ID -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">ID:</label>
+        <p class="text-gray-800">{{ parking_spot.id }}</p>
+      </div>
+
+      <!-- Spot Status -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Status:</label>
+        <p class="text-gray-800">{{ parking_spot.status }}</p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="text-center mt-6">
+        <button type="submit"
+          class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-md mr-2 transition">Delete</button>
+        <a href="/admin"
+          class="inline-block bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-md transition">Cancel</a>
+      </div>
+
+    </form>
+  </div>
+
+</body>
+
+</html>

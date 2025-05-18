@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Release Parking Spot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+  <div class="w-full max-w-2xl bg-white p-8 rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold text-center text-cyan-500 mb-6">Release the Parking Spot</h1>
+
+    <form action="/confirm_release/{{ parking_lot.id }}/{{ user_id }}" method="post" class="space-y-5">
+
+      <!-- Spot ID -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Spot ID</label>
+        <input type="text" name="spot_id" value="{{ parking_lot.id }}" readonly
+          class="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-700">
+      </div>
+
+      <!-- Vehicle No -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Vehicle No</label>
+        <input type="text" name="vehicle_no" value="{{ parking_lot.vehicle_no }}" readonly
+          class="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-700">
+      </div>
+
+      <!-- Parking Time -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Parking Time</label>
+        <input type="text" name="parking_time" value="{{ parking_lot.timestamp }}" readonly
+          class="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-700">
+      </div>
+
+      <!-- Release Time -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Release Time</label>
+        <input type="text" name="release_time" value="{{ now }}" readonly
+          class="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-700">
+      </div>
+
+      <!-- Total Cost -->
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Total Cost</label>
+        <input type="text" name="total_cost" value="₹{{ total_cost }}" readonly
+          class="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-700">
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex justify-center space-x-4">
+        <button type="submit"
+          class="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-blue-700 transition">Release</button>
+        <a href="/user/{{ user_id }}"
+          class="bg-gray-500 text-white font-semibold px-6 py-2 rounded-md hover:bg-gray-600 transition">Cancel</a>
+      </div>
+    </form>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-yXcMZzFl6bwZuL5HqlJfbHMPWQqUAF5AAZhvxVmw6bZrFz4Z6i5wBjsmvDnT/J4WUg6a8UdMZMl3iItm9Vqx3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+    <!-- <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="/admin" class="text-xl font-semibold text-cyan-500">Welcome {{this_user.fullname}}</a>
+            <div class="space-x-4">
+                <a href="/admin" class="text-gray-700 hover:text-cyan-500">Home</a>
+                <a href="/users" class="text-gray-700 hover:text-cyan-500">Users</a>
+                <a href="/search_parking" class="text-gray-700 hover:text-cyan-500">Search</a>
+                <a href="/summary" class="text-gray-700 hover:text-cyan-500">Summary</a>
+                <a href="/logout" class="text-red-600 hover:text-red-800">Logout</a>
+            </div>
+        </div>
+    </nav> -->
+    <nav class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        
+        <!-- Left Section: Logo and Brand Name -->
+        <div class="flex items-center space-x-3">
+            <span class="text-2xl font-bold text-gray-800">EZLot</span>
+        </div>
+
+        <!-- Center Section: Navigation Links -->
+        <div class="hidden md:flex space-x-6">
+            <a href="/admin" class="text-gray-700 hover:text-cyan-500 text-sm font-medium">Dashboard</a>
+            <a href="/users" class="text-gray-700 hover:text-cyan-500 text-sm font-medium">Users</a>
+            <a href="/search_parking" class="text-gray-700 hover:text-cyan-500 text-sm font-medium">Search</a>
+            <a href="/summary" class="text-gray-700 hover:text-cyan-500 text-sm font-medium flex items-center">
+                <i class="fas fa-chart-pie mr-1"></i> Summary
+            </a>
+        </div>
+
+        <!-- Right Section: Welcome + Logout -->
+        <div class="flex items-center space-x-4">
+            <span class="text-sm text-gray-600">Welcome, <strong>{{ this_user.fullname }}</strong></span>
+            <a href="/logout" class="text-red-600 hover:text-red-800 text-sm font-medium">Logout</a>
+        </div>
+    </div>
+</nav>
+
+
+   <div id="content" class="p-4">
+    <h3 class="text-2xl font-semibold mb-4">Users</h3>
+    <div id="table" class="border rounded-lg overflow-y-auto max-h-[380px]">
+        <table class="min-w-full table-auto border-collapse">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">ID</th>
+                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Email</th>
+                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Full Name</th>
+                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Address</th>
+                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Pincode</th>
+                    <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Type</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm">
+                {% for user in users %}
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="px-4 py-2">{{ user.id }}</td>
+                    <td class="px-4 py-2">{{ user.email }}</td>
+                    <td class="px-4 py-2">{{ user.fullname }}</td>
+                    <td class="px-4 py-2">{{ user.address }}</td>
+                    <td class="px-4 py-2">{{ user.pincode }}</td>
+                    <td class="px-4 py-2">{{ user.type }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+</body>
+</html>

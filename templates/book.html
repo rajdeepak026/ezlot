@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Lot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+    <div class="max-w-xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+        <h1 class="text-2xl font-bold text-center text-cyan-500 mb-6">Book the Parking Spot</h1>
+
+        <form action="/book/{{ parking_lot.id }}?user_id={{ user_id }}" method="POST" class="space-y-4">
+
+            <!-- Spot ID -->
+            <div>
+                <label for="Input1" class="block mb-1 font-medium">Spot ID</label>
+                <input type="text" id="Input1" name="spot_id" value="{{ parking_lot.id }}" readonly
+                    class="w-full px-4 py-2 border border-gray-300 bg-gray-100 rounded-md">
+            </div>
+
+            <!-- Address -->
+            <div>
+                <label for="Input2" class="block mb-1 font-medium">Address</label>
+                <input type="text" id="Input2" name="address" value="{{ parking_lot.address }}" readonly
+                    class="w-full px-4 py-2 border border-gray-300 bg-gray-100 rounded-md">
+            </div>
+
+            <!-- Pin Code -->
+            <div>
+                <label for="Input3" class="block mb-1 font-medium">Pin Code</label>
+                <input type="text" id="Input3" name="pincode" value="{{ parking_lot.pincode }}" readonly
+                    class="w-full px-4 py-2 border border-gray-300 bg-gray-100 rounded-md">
+            </div>
+
+            <!-- Vehicle Number -->
+            <div>
+                <label for="Input5" class="block mb-1 font-medium">Vehicle Number</label>
+                <input type="text" id="Input5" name="vehicle_no" required placeholder="Your vehicle number"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-center gap-4 pt-4">
+                <button type="submit"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md transition">Reserve</button>
+                <a href="/user/{{ user_id }}"
+                    class="bg-gray-400 hover:bg-gray-500 text-white font-semibold px-6 py-2 rounded-md transition">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

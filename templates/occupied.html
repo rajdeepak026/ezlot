@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Occupied Spot</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen font-sans">
+  <div class="w-full max-w-2xl p-8 bg-white rounded-lg shadow-lg">
+
+    <h1 class="text-2xl font-bold text-center text-cyan-500 mb-6">Vehicle Parking System</h1>
+    <h2 class="text-lg font-semibold text-center mb-4">Occupied Spot</h2>
+
+    <form action="/parking_spot/{{ this_user.id }}" method="POST" class="space-y-6">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <div>
+          <strong class="block text-gray-700">Spot ID:</strong>
+          <p class="mt-1 text-gray-800">{{ parking_spot.id }}</p>
+        </div>
+        <div>
+          <strong class="block text-gray-700">Customer ID:</strong>
+          <p class="mt-1 text-gray-800">{{ booked_user.id }}</p>
+        </div>
+        <div>
+          <strong class="block text-gray-700">Vehicle Number:</strong>
+          <p class="mt-1 text-gray-800">{{ parking_spot.vehicle_no }}</p>
+        </div>
+        <div>
+          <strong class="block text-gray-700">Date/Time Parked:</strong>
+          <p class="mt-1 text-gray-800">{{ parked_since }}</p>
+        </div>
+        <div>
+          <strong class="block text-gray-700">Parking Cost:</strong>
+          <p class="mt-1 text-gray-800">₹{{ cost }}</p>
+        </div>
+      </div>
+
+      <div class="text-center mt-6">
+        <a href="/admin"
+          class="inline-block bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-md transition">Cancel</a>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
